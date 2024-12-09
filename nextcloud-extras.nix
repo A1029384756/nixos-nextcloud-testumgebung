@@ -169,6 +169,12 @@ in {
           }
           header @immutable Cache-Control "max-age=15778463, immutable"
 
+          @notlegacy {
+              path *.php *.php/
+              not path /index* /remote* /public* /cron* /core/ajax/update* /status* /ocs/v1* /ocs/v2* /updater* /ocs-provider/* */richdocumentscode/proxy*
+          }
+          rewrite @notlegacy /index.php{uri}
+
           @static {
             path *.css *.js *.mjs *.svg *.gif *.png *.jpg *.ico *.wasm *.tflite
             not query v=*
